@@ -62,7 +62,10 @@
             </div>
             <!-- Lista de Arquivos -->
             <div id="file-list-container" class="mb-6 hidden">
-                <h2 class="text-lg font-semibold text-gray-700 mb-2">Arquivos Selecionados:</h2>
+                <div class="flex justify-between items-center mb-2">
+                    <h2 class="text-lg font-semibold text-gray-700">Arquivos Selecionados:</h2>
+                    <button id="clear-btn" class="text-sm bg-red-500 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-600 transition-colors">Limpar Lista</button>
+                </div>
                 <ul id="file-list" class="space-y-2 max-h-60 overflow-y-auto pr-2"></ul>
             </div>
             <!-- Botão de Compilação e Status -->
@@ -138,6 +141,7 @@
         const fileList = document.getElementById('file-list');
         const compileBtn = document.getElementById('compile-btn');
         const statusDiv = document.getElementById('status');
+        const clearBtn = document.getElementById('clear-btn');
         let uploadedFiles = [];
         let draggedItem = null;
 
@@ -235,6 +239,12 @@
             uploadedFiles.push(...newFiles);
             updateFileListUI();
             event.target.value = '';
+        });
+
+        clearBtn.addEventListener('click', () => {
+            uploadedFiles = [];
+            statusDiv.textContent = '';
+            updateFileListUI();
         });
 
         compileBtn.addEventListener('click', async () => {
@@ -418,4 +428,3 @@
 
 </body>
 </html>
-
